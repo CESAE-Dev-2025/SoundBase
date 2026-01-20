@@ -29,24 +29,6 @@
         @enderror
 
         <div class="mb-3">
-            <label for="nif" class="form-label">NIF</label>
-            <input name="nif" type="text" class="form-control" id="nif" value="{{ $user->nif }}"
-                aria-describedby="nifHelp">
-        </div>
-        @error('nif')
-            <p class="text-danger">Erro de NIF</p>
-        @enderror
-
-        <div class="mb-3">
-            <label for="address" class="form-label">Morada</label>
-            <input name="address" type="text" class="form-control" id="address" value="{{ $user->address }}"
-                aria-describedby="addressHelp">
-        </div>
-        @error('address')
-            <p class="text-danger">Erro de morada</p>
-        @enderror
-
-        <div class="mb-3">
             <label for="photo" class="form-label">Imagem de perfil</label>
             <input class="form-control" type="file" name="photo" id="photo" accept="image/*">
         </div>

@@ -3,8 +3,6 @@
 @section('content')
     <h3 class="my-3">Utilizadores</h3>
 
-    <h5>Utilizadores vindos da base de dados</h5>
-
     @if (session('message'))
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
@@ -29,7 +27,6 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Foto</th>
                     <th scope="col">Email</th>
-                    <th scope="col">NIF</th>
                     @auth
                         <th scope="col">Ações</th>
                     @endauth
@@ -45,7 +42,6 @@
                                 alt="Imagem de perfil" style="width: 50px" class="rounded-circle">
                         </td>
                         <td class="align-middle">{{ $user->email }}</td>
-                        <td class="align-middle">{{ $user->nif }}</td>
                         @auth
                             <td class="align-middle">
                                 <a href="{{ route('users.view', $user->id) }}" class="btn btn-info">Ver / Editar</a>

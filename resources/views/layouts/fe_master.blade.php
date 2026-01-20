@@ -32,9 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('dash.home') }}">BackOffice</a>
-                        </li> --}}
+                        </li>
                     @endauth
                 </ul>
             </div>

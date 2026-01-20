@@ -16,8 +16,6 @@ class UserController extends Controller
     public function index()
     {
 
-        dd(Auth::user());
-
         $search = request()->query('search') ? request()->query('search') : '';
 
         $users = $this->getAllUsers($search);
@@ -78,7 +76,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         // Validar dados recebidos
         $request->validate([
@@ -95,9 +93,7 @@ class UserController extends Controller
         // Inserir na bade de dados
         User::where('id', $request->id)->update([
             'name' => $request->name,
-            'photo' => $photo,
-            'nif' => $request->nif,
-            'address' => $request->address
+            'photo' => $photo
         ]);
 
         return redirect()
