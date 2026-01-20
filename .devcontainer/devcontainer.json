@@ -1,0 +1,25 @@
+{
+  "name": "Laravel SoundBase",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "onecentlin.laravel-extension-pack",
+        "cjhowe7.laravel-blade",
+        "bmewburn.vscode-intelephense-client",
+        "mehedidracula.php-namespace-resolver",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql",
+        "bmewburn.vscode-intelephense-client",
+        "onecentlin.laravel5-snippets",
+        "amiralizadeh94.laravel-extra-intellisense",
+        "shufo.vscode-blade-formatter",
+        "xdebug.php-debug"
+      ]
+    }
+  },
+  "forwardPorts": [8000, 3307],
+  "postCreateCommand": "composer install && cp .env.example .env && php artisan key:generate"
+}

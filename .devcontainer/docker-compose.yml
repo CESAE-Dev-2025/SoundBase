@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: SoundBase-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspaces:cached
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+    container_name: SoundBase-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: saoundbase
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    ports:
+      - '3307:3306' # <--- Aqui: 3307 no seu PC aponta para 3306 no container
+    networks:
+      - app-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
