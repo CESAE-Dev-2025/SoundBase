@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Band;
 use App\Models\Album;
 
@@ -100,9 +101,9 @@ class BandController extends Controller
 
     private function getAllBands($search)
     {
-        $bands = Band::all();
-
-        // $bands = Band::join('albums', 'bands.id', 'albums.band_id');
+        $bands = Band::leftJoin('albums', 'bands.id', 'albums.band_id')
+            ->select('bands.id', 'bands.name', 'bands.photo', DB::raw('count(albums.band_id) as albums'))
+            ->groupBy('bands.id');
 
         // if ($search) {
         //     $bands
@@ -110,7 +111,8 @@ class BandController extends Controller
         //         ->orWhere('album.title', "LIKE", "%$search%")
         //         ->select('bands.*', 'album.title as albumTitle', 'album.photo as albumCover');
         // }
-        // $bands = $bands->get();
+
+        $bands = $bands->get();
 
         return $bands;
     }
