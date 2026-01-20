@@ -1,8 +1,14 @@
 {
   "name": "Laravel SoundBase",
   "dockerComposeFile": "docker-compose.yml",
+
   "service": "app",
   "workspaceFolder": "/workspaces",
+  "forwardPorts": [8000, 3307],
+  "features": {
+    "ghcr.io/devcontainers-extra/features/composer:1": {}
+  },
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -19,7 +25,5 @@
         "xdebug.php-debug"
       ]
     }
-  },
-  "forwardPorts": [8000, 3307],
-  "postCreateCommand": "composer install && cp .env.example .env && php artisan key:generate"
+  }
 }
