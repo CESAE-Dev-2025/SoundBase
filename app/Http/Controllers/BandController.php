@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Band;
+use App\Models\Album;
 
 class BandController extends Controller
 {
@@ -11,7 +13,11 @@ class BandController extends Controller
      */
     public function index()
     {
-        //
+        $search = request()->query('search') ? request()->query('search') : null;
+
+        $bands = $this->getAllBands($search);
+
+        return view('bands.all_bands', compact('bands'));
     }
 
     /**
@@ -19,7 +25,8 @@ class BandController extends Controller
      */
     public function create()
     {
-        //
+        // $users = User::get();
+        return view('bands.add_band'); //, compact('users'));
     }
 
     /**
@@ -27,7 +34,19 @@ class BandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar dados recebidos
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+        ]);
+
+        // Inserir na bade de dados
+        Band::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()
+            ->route('bands.all')
+            ->with('message', 'banda adicionada com sucesso!');
     }
 
     /**
@@ -35,7 +54,10 @@ class BandController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // $band = $this->getBand($id);
+        $band = Band::where('id', $id)->first();
+
+        return view('bands.view_band', compact('band'));
     }
 
     /**
@@ -49,9 +71,22 @@ class BandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        // Validar dados recebidos
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+        ]);
+
+        // Inserir na bade de dados
+        Band::where('id', $request->id)->update([
+            'name' => $request->name,
+            'photo' => $request->photo ? $request->photo : null
+        ]);
+
+        return redirect()
+            ->route('bands.all')
+            ->with('message', 'Banda atualizada com sucesso!');
     }
 
     /**
@@ -59,6 +94,31 @@ class BandController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Band::where('id', $id)->delete();
+        return back()->with('message', 'Banda apagada com sucesso!');
+    }
+
+    private function getAllBands($search)
+    {
+        $bands = Band::all();
+
+        // $bands = Band::join('albums', 'bands.id', 'albums.band_id');
+
+        // if ($search) {
+        //     $bands
+        //         ->where('bands.name', "LIKE", "%$search%")
+        //         ->orWhere('album.title', "LIKE", "%$search%")
+        //         ->select('bands.*', 'album.title as albumTitle', 'album.photo as albumCover');
+        // }
+        // $bands = $bands->get();
+
+        return $bands;
+    }
+
+    private function getBand($id)
+    {
+        $band = Band::where('band.id', $id)->first();
+
+        return $band;
     }
 }
