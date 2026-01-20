@@ -1,29 +1,26 @@
 {
-  "name": "Laravel SoundBase",
-  "dockerComposeFile": "docker-compose.yml",
+    "name": "Laravel SoundBase",
+    "dockerComposeFile": "docker-compose.yml",
 
-  "service": "app",
-  "workspaceFolder": "/workspaces",
-  "forwardPorts": [8000, 3307],
-  "features": {
-    "ghcr.io/devcontainers-extra/features/composer:1": {}
-  },
+    "service": "app",
+    "workspaceFolder": "/workspaces",
+    "forwardPorts": [8000, 3307],
+    "features": {
+        "ghcr.io/devcontainers-extra/features/composer:1": {}
+    },
 
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "onecentlin.laravel-extension-pack",
-        "cjhowe7.laravel-blade",
-        "bmewburn.vscode-intelephense-client",
-        "mehedidracula.php-namespace-resolver",
-        "mtxr.sqltools",
-        "mtxr.sqltools-driver-mysql",
-        "bmewburn.vscode-intelephense-client",
-        "onecentlin.laravel5-snippets",
-        "amiralizadeh94.laravel-extra-intellisense",
-        "shufo.vscode-blade-formatter",
-        "xdebug.php-debug"
-      ]
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "onecentlin.laravel-extension-pack",
+                "bmewburn.vscode-intelephense-client",
+                "zobo.php-intellisense",
+                "mehedidracula.php-namespace-resolver",
+                "cjhowe7.laravel-blade",
+                "mtxr.sqltools",
+                "mtxr.sqltools-driver-mysql",
+                "xdebug.php-debug"
+            ]
+        }
     }
-  }
 }
