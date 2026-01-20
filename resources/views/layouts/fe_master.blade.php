@@ -26,19 +26,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="{{ route('homepage') }}">Home</a>
-                    </li>
-                    {{-- @auth --}}
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('albums.all') }}">Albums</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dash.home') }}">Dashboard</a>
-                    </li> --}}
-                    {{-- @endauth --}}
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dash.home') }}">BackOffice</a>
+                        </li> --}}
+                    @endauth
                 </ul>
             </div>
             @if (Route::has('login'))
@@ -53,11 +50,11 @@
                             Log in
                         </a>
 
-                        {{-- @if (Route::has('register'))
+                        @if (Route::has('register'))
                             <a href="{{ route('users.add') }}" class="btn btn-outline-primary">
                                 Register
                             </a>
-                        @endif --}}
+                        @endif
                     @endauth
                 </nav>
             @endif

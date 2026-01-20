@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Band;
 use App\Models\Album;
+use Illuminate\Support\Facades\Storage;
 
 class BandController extends Controller
 {
@@ -26,8 +27,7 @@ class BandController extends Controller
      */
     public function create()
     {
-        // $users = User::get();
-        return view('bands.add_band'); //, compact('users'));
+        return view('bands.add_band');
     }
 
     /**
@@ -77,12 +77,19 @@ class BandController extends Controller
         // Validar dados recebidos
         $request->validate([
             'name' => 'required|min:3|max:50',
+            'photo' => 'image'
         ]);
+
+        $photo = null;
+
+        if ($request->hasFile('photo')) {
+            $photo = Storage::putFile('userPhotos', $request->photo);
+        }
 
         // Inserir na bade de dados
         Band::where('id', $request->id)->update([
             'name' => $request->name,
-            'photo' => $request->photo ? $request->photo : null
+            'photo' => $photo
         ]);
 
         return redirect()

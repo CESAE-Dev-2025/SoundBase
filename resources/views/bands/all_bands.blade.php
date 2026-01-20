@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@use('App\Enums\UserType')
+
 @section('content')
 
     <h3 class="my-3">Bandas</h3>
@@ -41,7 +43,9 @@
                         <td class="align-middle">{{ $band->albums }}</td>
                         <td class="align-middle">
                             <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info">Ver / Editar</a>
-                            <a href="{{ route('bands.delete', $band->id) }}" class="btn btn-danger">Apagar</a>
+                            @if (Auth::user()->user_type == UserType::ADMIN)
+                                <a href="{{ route('bands.delete', $band->id) }}" class="btn btn-danger">Apagar</a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
