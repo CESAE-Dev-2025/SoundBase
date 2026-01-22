@@ -19,6 +19,7 @@
                 "cjhowe7.laravel-blade",
                 "mtxr.sqltools",
                 "mtxr.sqltools-driver-mysql",
+                "gruntfuggly.todo-tree",
                 "xdebug.php-debug"
             ]
         }
