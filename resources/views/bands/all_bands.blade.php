@@ -50,10 +50,12 @@
                         <td class="align-middle">{{ $band->name }}</td>
                         <td class="align-middle text-center col-1">{{ $band->albums }}</td>
                         <td class="align-middle text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">
-                            <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver / Editar</a>
-
                             @if ($isAdmin)
+                                <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver / Editar</a>
                                 <a href="{{ route('bands.delete', $band->id) }}" class="btn btn-danger m-1">Apagar</a>
+                            @else
+                                {{-- TODO: Mudar rota para albuns.vew --}}
+                                <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver detalhes</a>
                             @endif
                         </td>
                     </tr>
