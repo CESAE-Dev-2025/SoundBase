@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer>
     </script>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
@@ -25,10 +25,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
-                    </li>
                     @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
                         </li>
@@ -37,27 +37,27 @@
                         </li>
                     @endauth
                 </ul>
-            </div>
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <form method="post" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-primary">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-link">
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('users.add') }}" class="btn btn-outline-primary">
-                                Register
+                @if (Route::has('login'))
+                    <div class="flex items-center ms-auto gap-4">
+                        @auth
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-primary">Logout</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-link">
+                                Log in
                             </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('users.add') }}" class="btn btn-outline-primary">
+                                    Register
+                                </a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </div>
     </nav>
 
