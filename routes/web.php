@@ -32,6 +32,8 @@ Route::post('/bands/store-band', [BandController::class, 'store'])
 Route::put('/update-band', [BandController::class, 'update'])
     ->name('bands.update');
 
+// TODO: Adicionar rotas de albuns
+
 // --------------------------------------------------------------- Users Routes
 Route::get('/users', [UserController::class, 'index'])
     ->name('users.all')->middleware('auth');

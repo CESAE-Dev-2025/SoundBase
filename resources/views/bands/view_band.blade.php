@@ -9,7 +9,7 @@
 @section('content')
     <h3 class="my-3">Detalhes da banda '{{ $band->name }}'</h3>
 
-    <form method="post" action="{{ route('bands.update') }}" class="col-6">
+    <form method="post" action="{{ route('bands.update') }}" class="col-6" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -23,6 +23,12 @@
         @error('name')
             <p class="text-danger">Erro de nome</p>
         @enderror
+
+        <div class="mb-3">
+            <label for="photo" class="form-label">Imagem da banda</label>
+            <input class="form-control" type="file" name="photo" id="photo" accept="image/*"
+                {{ $isAdmin ? '' : 'readonly' }}>
+        </div>
 
         @if ($isAdmin)
             <button type="submit" class="btn btn-primary">Atualizar</button>

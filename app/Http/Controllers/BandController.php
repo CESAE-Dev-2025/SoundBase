@@ -83,7 +83,7 @@ class BandController extends Controller
         $photo = null;
 
         if ($request->hasFile('photo')) {
-            $photo = Storage::putFile('userPhotos', $request->photo);
+            $photo = Storage::putFile('bandPhotos', $request->photo);
         }
 
         // Inserir na bade de dados

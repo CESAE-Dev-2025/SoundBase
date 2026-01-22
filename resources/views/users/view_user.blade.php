@@ -1,5 +1,13 @@
 @extends('layouts.fe_master')
 
+@use('App\Enums\UserType')
+
+@php
+    $isAdmin = Auth::user()->user_type == UserType::ADMIN;
+@endphp
+
+{{-- TODO: Permitir atualizar apenas eu próprio utilizador --}}
+
 @section('content')
     <h3 class="my-3">Detalhes do utilizador '{{ $user->name }}'</h3>
 
@@ -33,6 +41,8 @@
             <input class="form-control" type="file" name="photo" id="photo" accept="image/*">
         </div>
 
-        <button type="submit" class="btn btn-primary">Atualizar</button>
+        @if ($isAdmin)
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        @endif
     </form>
 @endsection

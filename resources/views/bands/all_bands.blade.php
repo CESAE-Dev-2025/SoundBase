@@ -19,7 +19,7 @@
         <a class="btn btn-primary mb-3" href="{{ route('bands.add') }}">Adicionar banda</a>
         <p>Ainda não há bandas... :-(</p>
     @else
-        <div class="row">
+        <div class="d-flex gap-2">
             <form class="d-flex mb-3 col" role="search" action="">
                 <input class="form-control me-2" type="search" name="search" placeholder="Pesquisar banda"
                     aria-label="Search task" />
