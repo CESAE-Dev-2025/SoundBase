@@ -14,13 +14,7 @@ class AlbumController extends Controller
      */
     public function index(string $bandId)
     {
-        $search = request()->query('search') ? request()->query('search') : null;
-
-        $band = $this->getBand($bandId);
-
-        $albums = $this->getAllAlbums($search, $bandId);
-
-        return view('albums.all_albums', compact('albums', 'band'));
+        //
     }
 
     /**
