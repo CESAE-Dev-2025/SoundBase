@@ -3,7 +3,8 @@
 @use('App\Enums\UserType')
 
 @php
-    $isAdmin = Auth::user()->user_type == UserType::ADMIN;
+    $isLoggedIn = Auth::user() != null;
+    $isAdmin = $isLoggedIn && Auth::user()->user_type == UserType::ADMIN;
 @endphp
 
 @section('content')
@@ -15,8 +16,11 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
-    @if (count($bands) == 0)
+    @if ($isLoggedIn)
         <a class="btn btn-primary mb-3" href="{{ route('bands.add') }}">Adicionar banda</a>
+    @endif
+
+    @if (count($bands) == 0)
         <p>Ainda não há bandas... :-(</p>
     @else
         <div class="d-flex gap-2">
@@ -25,7 +29,9 @@
                     aria-label="Search task" />
                 <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
             </form>
-            <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('bands.add') }}">Adicionar banda</a>
+            @if ($isLoggedIn)
+                <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('bands.add') }}">Adicionar banda</a>
+            @endif
         </div>
 
         <table class="table">
@@ -35,7 +41,7 @@
                     <th scope="col" class="text-center col-1">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col" class="text-center col-1">Albums</th>
-                    <th scope="col" class="text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">Ações</th>
+                    <th scope="col" class="text-center col-3">Ações</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -49,13 +55,11 @@
                         </td>
                         <td class="align-middle">{{ $band->name }}</td>
                         <td class="align-middle text-center col-1">{{ $band->albums }}</td>
-                        <td class="align-middle text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">
-                            @if ($isAdmin)
-                                <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver / Editar</a>
+                        <td class="align-middle text-center col-3">
+                            <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver
+                                {{ $isLoggedIn ? '/ Editar' : 'detalhes' }}</a>
+                            @if ($isLoggedIn)
                                 <a href="{{ route('bands.delete', $band->id) }}" class="btn btn-danger m-1">Apagar</a>
-                            @else
-                                {{-- TODO: Mudar rota para albuns.vew --}}
-                                <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver detalhes</a>
                             @endif
                         </td>
                     </tr>

@@ -3,10 +3,10 @@
 @use('App\Enums\UserType')
 
 @php
-    $isAdmin = Auth::user()->user_type == UserType::ADMIN;
+    // $isAdmin = Auth::user()->user_type == UserType::ADMIN;
+    // $isCurrentUser = Auth::user()->id === $user->id;
+    $isAllowedToEdit = Auth::user()->id === $user->id || Auth::user()->user_type == UserType::ADMIN;
 @endphp
-
-{{-- TODO: Permitir atualizar apenas eu próprio utilizador --}}
 
 @section('content')
     <h3 class="my-3">Detalhes do utilizador '{{ $user->name }}'</h3>
@@ -38,10 +38,11 @@
 
         <div class="mb-3">
             <label for="photo" class="form-label">Imagem de perfil</label>
-            <input class="form-control" type="file" name="photo" id="photo" accept="image/*">
+            <input class="form-control" type="file" name="photo" id="photo" accept="image/*"
+                {{ $isAllowedToEdit ? '' : 'disabled' }}>
         </div>
 
-        @if ($isAdmin)
+        @if ($isAllowedToEdit)
             <button type="submit" class="btn btn-primary">Atualizar</button>
         @endif
     </form>

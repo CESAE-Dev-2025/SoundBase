@@ -25,10 +25,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
+                    </li>
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
                         </li>

@@ -23,7 +23,9 @@
                     aria-label="Search user" />
                 <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
             </form>
-            <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('users.add') }}">Adicionar utilizador</a>
+            @if ($isAdmin)
+                <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('users.add') }}">Adicionar utilizador</a>
+            @endif
         </div>
 
         <table class="table">
@@ -33,29 +35,31 @@
                     <th scope="col" class="col-1">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col" class="col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">Ações</th>
+                    <th scope="col" class="col-3 text-center {{ $isAdmin ? '' : 'col-lg-2' }}">Ações</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 @foreach ($users as $user)
-                    <tr>
-                        <th class="align-middle col-1">{{ $user->id }}</th>
-                        <td class="align-middle profile-image col-1">
-                            <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/Profile_avatar_placeholder_large.png') }}"
-                                alt="Imagem de perfil" class="rounded-circle" id="profile-picture">
-                        </td>
-                        <td class="align-middle">{{ $user->name }}</td>
-                        <td class="align-middle">{{ $user->email }}</td>
-                        @auth
-                            <td class="align-middle text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">
-                                <a href="{{ route('users.view', $user->id) }}" class="btn btn-info m-1">Ver / Editar</a>
-
-                                @if ($isAdmin)
-                                    <a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger m-1">Apagar</a>
-                                @endif
+                    @if ($isAdmin || Auth::user()->id === $user->id)
+                        <tr>
+                            <th class="align-middle col-1">{{ $user->id }}</th>
+                            <td class="align-middle profile-image col-1">
+                                <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/Profile_avatar_placeholder_large.png') }}"
+                                    alt="Imagem de perfil" class="rounded-circle" id="profile-picture">
                             </td>
-                        @endauth
-                    </tr>
+                            <td class="align-middle">{{ $user->name }}</td>
+                            <td class="align-middle">{{ $user->email }}</td>
+                            @auth
+                                <td class="align-middle text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">
+                                    <a href="{{ route('users.view', $user->id) }}" class="btn btn-info m-1">Ver / Editar</a>
+
+                                    @if ($isAdmin)
+                                        <a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger m-1">Apagar</a>
+                                    @endif
+                                </td>
+                            @endauth
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

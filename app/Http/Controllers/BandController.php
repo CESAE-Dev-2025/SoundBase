@@ -58,7 +58,9 @@ class BandController extends Controller
         // $band = $this->getBand($id);
         $band = Band::where('id', $id)->first();
 
-        return view('bands.view_band', compact('band'));
+        $albums = $this->getAllAlbums($band->id);
+
+        return view('bands.view_band', compact('band', 'albums'));
     }
 
     /**
@@ -129,5 +131,12 @@ class BandController extends Controller
         $band = Band::where('band.id', $id)->first();
 
         return $band;
+    }
+
+    private function getAllAlbums($bandId)
+    {
+        $albums = Album::where('albums.band_id', $bandId)->get();
+
+        return $albums;
     }
 }
