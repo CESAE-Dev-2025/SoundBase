@@ -56,8 +56,9 @@ class AlbumController extends Controller
     public function show(string $id)
     {
         $album = Album::where('id', $id)->first();
+        $band = Band::where('id', $album->band_id)->first()->name;
 
-        return view('albums.view_album', compact('album'));
+        return view('albums.view_album', compact('album', 'band'));
     }
 
     /**

@@ -7,10 +7,14 @@
 @endphp
 
 @section('content')
-    <h3 class="my-3">Detalhes do álbum '{{ $album->title }}'</h3>
+    <h1 class="my-3">{{ $album->title }} | {{ $band }}</h1>
 
-    <div class="d-flex">
-        <form method="post" action="{{ route('albums.update') }}" class="col-6" enctype="multipart/form-data">
+    <div class="row">
+
+        <img src="{{ $album->photo ? asset('storage/' . $album->photo) : asset('images/no_album_cover.jpg') }}"
+            alt="Imagem do álbum" class="col-4">
+
+        <form method="post" action="{{ route('albums.update') }}" class="col-8" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -45,7 +49,5 @@
                 <button type="submit" class="btn btn-primary">Atualizar</button>
             @endauth
         </form>
-        <img src="{{ $album->photo ? asset('storage/' . $album->photo) : asset('images/no_album_cover.jpg') }}"
-            alt="Imagem do álbum" class="ms-auto me-0 col-3">
     </div>
 @endsection
