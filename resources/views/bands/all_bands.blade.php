@@ -3,8 +3,8 @@
 @use('App\Enums\UserType')
 
 @php
-    $isLoggedIn = Auth::user() != null;
-    $isAdmin = $isLoggedIn && Auth::user()->user_type == UserType::ADMIN;
+    // $isLoggedIn = Auth::user() != null;
+    $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
 @endphp
 
 @section('content')
@@ -16,9 +16,9 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
-    @if ($isLoggedIn)
+    @auth
         <a class="btn btn-primary mb-3" href="{{ route('bands.add') }}">Adicionar banda</a>
-    @endif
+    @endauth
 
     @if (count($bands) == 0)
         <p>Ainda não há bandas... :-(</p>
@@ -29,9 +29,9 @@
                     aria-label="Search task" />
                 <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
             </form>
-            @if ($isLoggedIn)
+            @auth
                 <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('bands.add') }}">Adicionar banda</a>
-            @endif
+            @endauth
         </div>
 
         <table class="table">
@@ -49,7 +49,6 @@
                     <tr>
                         <th class="align-middle text-center col-1" scope="row">{{ $band->id }}</th>
                         <td class="align-middle profile-image text-center col-1">
-                            {{-- TODO: Adicionar imagem da banda --}}
                             <img src="{{ $band->photo ? asset('storage/' . $band->photo) : asset('images/Profile_avatar_placeholder_large.png') }}"
                                 alt="Imagem de perfil" class="rounded-circle" id="profile-picture">
                         </td>
@@ -57,8 +56,8 @@
                         <td class="align-middle text-center col-1">{{ $band->albums }}</td>
                         <td class="align-middle text-center col-3">
                             <a href="{{ route('bands.view', $band->id) }}" class="btn btn-info m-1">Ver
-                                {{ $isLoggedIn ? '/ Editar' : 'detalhes' }}</a>
-                            @if ($isLoggedIn)
+                                {{ Auth::user() ? '/ Editar' : 'detalhes' }}</a>
+                            @if ($isAdmin)
                                 <a href="{{ route('bands.delete', $band->id) }}" class="btn btn-danger m-1">Apagar</a>
                             @endif
                         </td>

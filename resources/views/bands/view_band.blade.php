@@ -32,11 +32,13 @@
                 <p class="text-danger">Erro de nome</p>
             @enderror
 
-            <div class="mb-3">
-                <label for="photo" class="form-label">Imagem da banda</label>
-                <input class="form-control" type="file" name="photo" id="photo" accept="image/*"
-                    value="{{ $band->photo }}" {{ $isLoggedIn ? '' : 'disabled' }}>
-            </div>
+            @auth
+                <div class="mb-3">
+                    <label for="photo" class="form-label">Imagem da banda</label>
+                    <input class="form-control" type="file" name="photo" id="photo" accept="image/*"
+                        value="{{ $band->photo }}" {{ $isLoggedIn ? '' : 'disabled' }}>
+                </div>
+            @endauth
 
             @if ($isLoggedIn)
                 <button type="submit" class="btn btn-primary">Atualizar</button>
@@ -78,7 +80,7 @@
                         <td class="align-middle text-center col-3">
                             <a href="{{ route('albums.view', $album->id) }}" class="btn btn-info m-1">Ver
                                 {{ $isLoggedIn ? '/ Editar' : 'detalhes' }}</a>
-                            @if ($isLoggedIn)
+                            @if ($isAdmin)
                                 <a href="{{ route('albums.delete', $album->id) }}" class="btn btn-danger m-1">Apagar</a>
                             @endif
                         </td>

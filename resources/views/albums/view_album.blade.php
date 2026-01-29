@@ -36,15 +36,14 @@
                 <p class="text-danger">Erro de data de lançamento</p>
             @enderror
 
-            <div class="mb-3">
-                <label for="photo" class="form-label">Imagem do álbum</label>
-                <input class="form-control" type="file" name="photo" id="photo" accept="image/*"
-                    {{ $isAdmin ? '' : 'disabled' }}>
-            </div>
+            @auth
+                <div class="mb-3">
+                    <label for="photo" class="form-label">Imagem do álbum</label>
+                    <input class="form-control" type="file" name="photo" id="photo" accept="image/*">
+                </div>
 
-            @if ($isAdmin)
                 <button type="submit" class="btn btn-primary">Atualizar</button>
-            @endif
+            @endauth
         </form>
         <img src="{{ $album->photo ? asset('storage/' . $album->photo) : asset('images/no_album_cover.jpg') }}"
             alt="Imagem do álbum" class="ms-auto me-0 col-3">

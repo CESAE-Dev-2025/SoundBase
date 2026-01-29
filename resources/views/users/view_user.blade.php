@@ -3,8 +3,6 @@
 @use('App\Enums\UserType')
 
 @php
-    // $isAdmin = Auth::user()->user_type == UserType::ADMIN;
-    // $isCurrentUser = Auth::user()->id === $user->id;
     $isAllowedToEdit = Auth::user()->id === $user->id || Auth::user()->user_type == UserType::ADMIN;
 @endphp
 

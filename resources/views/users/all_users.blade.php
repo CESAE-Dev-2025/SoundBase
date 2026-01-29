@@ -17,16 +17,17 @@
         <a class="btn btn-primary mb-3" href="{{ route('users.add') }}">Adicionar utilizador</a>
         <p>Ainda não há utilizadores... :-(</p>
     @else
-        <div class="d-flex gap-2">
-            <form class="d-flex mb-3 col" role="search" action="">
-                <input class="form-control me-2" type="search" name="search" placeholder="Pesquisar ulilizador"
-                    aria-label="Search user" />
-                <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
-            </form>
-            @if ($isAdmin)
+        @if ($isAdmin)
+            <div class="d-flex gap-2">
+                <form class="d-flex mb-3 col" role="search" action="">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Pesquisar ulilizador"
+                        aria-label="Search user" />
+                    <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+                </form>
+
                 <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('users.add') }}">Adicionar utilizador</a>
-            @endif
-        </div>
+            </div>
+        @endif
 
         <table class="table">
             <thead>
