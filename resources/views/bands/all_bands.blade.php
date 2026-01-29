@@ -3,7 +3,6 @@
 @use('App\Enums\UserType')
 
 @php
-    // $isLoggedIn = Auth::user() != null;
     $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
 @endphp
 
@@ -16,9 +15,10 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
-    @auth
+    @if ($isAdmin)
         <a class="btn btn-primary mb-3" href="{{ route('bands.add') }}">Adicionar banda</a>
-    @endauth
+    @endif
+
 
     @if (count($bands) == 0)
         <p>Ainda não há bandas... :-(</p>
@@ -29,9 +29,6 @@
                     aria-label="Search task" />
                 <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
             </form>
-            @auth
-                <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('bands.add') }}">Adicionar banda</a>
-            @endauth
         </div>
 
         <table class="table">
