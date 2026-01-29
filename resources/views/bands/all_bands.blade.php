@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <h3 class="my-3">Bandas</h3>
+    <h1 class="my-3">Bandas</h1>
 
 
     @if (session('message'))
