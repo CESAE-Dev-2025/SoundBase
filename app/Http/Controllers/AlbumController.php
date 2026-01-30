@@ -123,13 +123,10 @@ class AlbumController extends Controller
 
     private function getAllAlbums($search)
     {
-        $albums = Album::leftJoin('bands', 'albums.band_id', 'bands.id')
+        return Album::leftJoin('bands', 'albums.band_id', 'bands.id')
             ->where('bands.name', "LIKE", "%$search%")
             ->orWhere('albums.title', "LIKE", "%$search%")
-            ->select('albums.*', 'bands.name as band', 'bands.photo as bandImage');
-
-        $albums = $albums->get();
-
-        return $albums;
+            ->select('albums.*', 'bands.name as band', 'bands.photo as bandImage')
+            ->get();
     }
 }

@@ -15,7 +15,7 @@ class BandController extends Controller
      */
     public function index()
     {
-        $search = request()->query('search') ? request()->query('search') : null;
+        $search = request()->query('search') ? request()->query('search') : "";
 
         $bands = $this->getAllBands($search);
 
@@ -110,20 +110,11 @@ class BandController extends Controller
 
     private function getAllBands($search)
     {
-        $bands = Band::leftJoin('albums', 'bands.id', 'albums.band_id')
+        return Band::leftJoin('albums', 'bands.id', 'albums.band_id')
+            ->where('bands.name', "LIKE", "%$search%")
             ->select('bands.id', 'bands.name', 'bands.photo', DB::raw('count(albums.band_id) as albums'))
-            ->groupBy('bands.id');
-
-        // if ($search) {
-        //     $bands
-        //         ->where('bands.name', "LIKE", "%$search%")
-        //         ->orWhere('album.title', "LIKE", "%$search%")
-        //         ->select('bands.*', 'album.title as albumTitle', 'album.photo as albumCover');
-        // }
-
-        $bands = $bands->get();
-
-        return $bands;
+            ->groupBy('bands.id')
+            ->get();
     }
 
     private function getBand($id)
