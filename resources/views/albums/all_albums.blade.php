@@ -52,7 +52,7 @@
                         <td class="align-middle text-center col-2">{{ date('d/m/Y', strtotime($album->release_date)) }}</td>
                         <td class="align-middle text-left" scope="row">
                             <img src="{{ $album->photo ? asset('storage/' . $album->bandImage) : asset('images/no_album_cover.jpg') }}"
-                                 alt="Imagem da banda" class="me-2" id="cover-picture">
+                                 alt="Imagem da banda" class="rounded-circle me-2" id="cover-picture">
                             {{ $album->band }}</td>
                         <td class="align-middle text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">
                             @if ($isAdmin)
