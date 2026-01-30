@@ -1,50 +1,23 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/php-mariadb
 {
-    "name": "PHP & MariaDB",
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "app",
-    "workspaceFolder": "/workspaces",
-
-    // Features to add to the dev container. More info: https://containers.dev/features.
-    // "features": {},
-
-    // For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
-    "forwardPorts": [8080, 3307],
-
-    // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
-    "features": {
-        "ghcr.io/devcontainers-extra/features/composer:1": {}
-    },
-
-    // Configure tool-specific properties.
+	"name": "SoundBase (Laravel PHP 8.4)",
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/var/www",
     "customizations": {
-        "vscode": {
-            "extensions": [
-                "onecentlin.laravel-extension-pack",
-                "bmewburn.vscode-intelephense-client",
-                "zobo.php-intellisense",
-                "mehedidracula.php-namespace-resolver",
-                "cjhowe7.laravel-blade",
-                "mtxr.sqltools",
-                "mtxr.sqltools-driver-mysql",
-                "gruntfuggly.todo-tree",
-                "xdebug.php-debug"
-            ]
-        },
-        "jetbrains": {
-            "plugins": [
+		"jetbrains": {
+			"plugins": [
                 "com.jetbrains.php",
-                "com.kalessil.phpStorm.phpInspectionsUltimate",
-                "com.laravel_idea.plugin",
-                "com.intellij.ml.llm",
-                "github.copilot"
-            ],
-            "backend": "PhpStorm"
-        }
-    }
-
-    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-    // "remoteUser": "root"
+				"com.laravel_idea.plugin",
+				"com.kalessil.phpStorm.phpInspectionsEA",
+				"de.espend.idea.php.annotation",
+				"com.intellij.database",
+				"uk.co.benniemaz.php-stan",
+				"com.github.shyim.pestjetbrains"
+			]
+		}
+	},
+	"remoteUser": "laravel",
+	"postCreateCommand": "composer install && npm install"
 }

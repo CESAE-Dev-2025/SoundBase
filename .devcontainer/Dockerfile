@@ -1,17 +1,41 @@
-FROM mcr.microsoft.com/devcontainers/php:1-8.2-bookworm
+FROM php:8.4-fpm
 
-# Install MariaDB client
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y mariadb-client \ 
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+# Argumentos definidos no docker-compose.yml
+ARG user
+ARG uid
 
-# Install php-mysql driver
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Instalar dependências do sistema
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    libzip-dev \
+    libpq-dev \
+    libicu-dev
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Limpar cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# [Optional] Uncomment this line to install global node packages.
-# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+# Instalar extensões do PHP
+RUN docker-php-ext-install bcmath gd intl mbstring opcache pcntl pdo_mysql zip
 
+# Obter o Composer mais recente
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Criar usuário do sistema para executar comandos do Composer e Artisan
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Instalar Node.js (necessário para o Vite no Laravel)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
+# Definir diretório de trabalho
+WORKDIR /var/www
+
+USER $user
