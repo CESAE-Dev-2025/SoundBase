@@ -8,8 +8,7 @@
 
 @section('content')
     {{-- TODO: Receber informações da banda --}}
-    <h3 class="my-3">Álbums | {{ $band->name }}</h3>
-
+    <h1 class="my-3">Álbums</h1>
 
     @if (session('message'))
         <div class="alert alert-success">{{ session('message') }}</div>
@@ -37,6 +36,7 @@
                     <th scope="col" class="text-center col-1">Capa</th>
                     <th scope="col">Título</th>
                     <th scope="col" class="text-center col-2">Data de lançamento</th>
+                    <th scope="col" class="text-center col-2">Banda</th>
                     <th scope="col" class="text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">Ações</th>
                 </tr>
             </thead>
@@ -45,12 +45,15 @@
                     <tr>
                         <th class="align-middle text-center col-1" scope="row">{{ $album->id }}</th>
                         <td class="align-middle cover-image text-center col-1">
-                            {{-- TODO: Adicionar imagem do álbum --}}
                             <img src="{{ $album->photo ? asset('storage/' . $album->photo) : asset('images/no_album_cover.jpg') }}"
                                 alt="Imagem do álbum" class="" id="cover-picture">
                         </td>
                         <td class="align-middle">{{ $album->title }}</td>
-                        <td class="align-middle text-center col-2">{{ date('d-m-Y', strtotime($album->release_date)) }}</td>
+                        <td class="align-middle text-center col-2">{{ date('d/m/Y', strtotime($album->release_date)) }}</td>
+                        <td class="align-middle text-left" scope="row">
+                            <img src="{{ $album->photo ? asset('storage/' . $album->bandImage) : asset('images/no_album_cover.jpg') }}"
+                                 alt="Imagem da banda" class="me-2" id="cover-picture">
+                            {{ $album->band }}</td>
                         <td class="align-middle text-center col-3 {{ $isAdmin ? '' : 'col-lg-2' }}">
                             @if ($isAdmin)
                                 <a href="{{ route('albums.view', $album->id) }}" class="btn btn-info m-1">Ver / Editar</a>

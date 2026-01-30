@@ -12,9 +12,13 @@ class AlbumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $bandId)
+    public function index()
     {
-        //
+        $search = request()->query('search') ? request()->query('search') : "";
+
+        $albums = $this->getAllAlbums($search);
+
+        return view('albums.all_albums', compact('albums'));
     }
 
     /**
@@ -117,16 +121,12 @@ class AlbumController extends Controller
         return $band;
     }
 
-    private function getAllAlbums($search, $bandId)
+    private function getAllAlbums($search)
     {
-        $albums = Album::where('albums.band_id', $bandId);
-
-        // if ($search) {
-        //     $bands
-        //         ->where('bands.name', "LIKE", "%$search%")
-        //         ->orWhere('album.title', "LIKE", "%$search%")
-        //         ->select('bands.*', 'album.title as albumTitle', 'album.photo as albumCover');
-        // }
+        $albums = Album::leftJoin('bands', 'albums.band_id', 'bands.id')
+            ->where('bands.name', "LIKE", "%$search%")
+            ->orWhere('albums.title', "LIKE", "%$search%")
+            ->select('albums.*', 'bands.name as band', 'bands.photo as bandImage');
 
         $albums = $albums->get();
 

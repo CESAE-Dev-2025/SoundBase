@@ -30,8 +30,8 @@ Route::put('/update-band', [BandController::class, 'update'])
     ->name('bands.update')->middleware('auth');
 
 // -------------------------------------------------------------- Albums Routes
-// Route::get('/albums', [AlbumController::class, 'index'])
-//     ->name('albums.all')->middleware('auth');
+ Route::get('/albums', [AlbumController::class, 'index'])
+     ->name('albums.all');
 
 Route::get('/albums/{id}', [AlbumController::class, 'show'])
     ->name('albums.view');
