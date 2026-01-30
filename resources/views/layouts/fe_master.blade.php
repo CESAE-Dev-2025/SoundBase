@@ -2,7 +2,7 @@
 @use('App\Enums\UserType')
 
 @php
-    $isAdmin = Auth::user() == null ? false : Auth::user()->user_type == UserType::ADMIN;
+    $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
 @endphp
 
 <!DOCTYPE html>
@@ -38,6 +38,9 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('albums.all') }}">Álbums</a>
                 </li>
 
                 @auth
@@ -98,6 +101,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('bands.all') }}" class="nav-link text-body-secondary">Bandas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('albums.all') }}" class="nav-link text-body-secondary">Álbums</a>
                 </li>
 
                 @if ($isAdmin)

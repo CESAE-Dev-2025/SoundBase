@@ -55,7 +55,7 @@
 
     <div class="container px-4 py-5">
         <div class="p-5 text-center bg-body-tertiary rounded-3">
-            <h1 class="text-body-emphasis">Pronto para organizar a tua música?</h1>
+            <h1 class="text-body-emphasis">Pronto para organizar as tuas músicas?</h1>
             <p class="col-lg-8 mx-auto fs-5 text-muted">
                 Junta-te ao Soundbase hoje e começa a catalogar as tuas bandas favoritas de forma simples e intuitiva.
             </p>

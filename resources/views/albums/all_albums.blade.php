@@ -3,7 +3,7 @@
 @use('App\Enums\UserType')
 
 @php
-    $isAdmin = Auth::user()->user_type == UserType::ADMIN;
+    $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
 @endphp
 
 @section('content')

@@ -3,7 +3,7 @@
 @use('App\Enums\UserType')
 
 @php
-    $isAllowedToEdit = Auth::user()->id === $user->id || Auth::user()->user_type == UserType::ADMIN;
+    $isAllowedToEdit = Auth::user()->id === $user->id || (Auth::user() != null && Auth::user()->user_type == UserType::ADMIN);
 @endphp
 
 @section('content')
