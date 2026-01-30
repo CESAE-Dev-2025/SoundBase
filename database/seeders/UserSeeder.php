@@ -21,5 +21,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin@soundbase.com'),
             'user_type' => UserType::ADMIN
         ]);
+        User::create([
+            'name' => 'Leandro Gabriel',
+            'email' => 'leandro@gmail.com',
+            'password' => Hash::make('leandro@gmail.com'),
+            'user_type' => UserType::USER
+        ]);
     }
 }
