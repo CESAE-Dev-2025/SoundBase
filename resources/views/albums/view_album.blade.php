@@ -32,7 +32,7 @@
 
             <div class="mb-3">
                 <label for="release_date" class="form-label">Data de lançamento</label>
-                <input name="release_date" type="text" class="form-control" id="release-date"
+                <input name="release_date" type="date" class="form-control" id="release-date"
                     value="{{ $album->release_date }}" aria-describedby="release_dateHelp" required
                     {{ $isAdmin ? '' : 'readonly' }}>
             </div>

@@ -74,7 +74,8 @@
                                 alt="Imagem do álbum" class="" id="cover-picture">
                         </td>
                         <td class="align-middle">{{ $album->title }}</td>
-                        <td class="align-middle text-center col-2">{{ $album->release_date }}</td>
+<!--                        <td class="align-middle text-center col-2">{{ $album->release_date }}</td>-->
+                        <td class="align-middle text-center col-2">{{ date('d/m/Y', strtotime($album->release_date)) }}</td>
                         <td class="align-middle text-center col-3">
                             <a href="{{ route('albums.view', $album->id) }}" class="btn btn-info m-1">Ver
                                 {{ Auth::user() ? '/ Editar' : 'detalhes' }}</a>
