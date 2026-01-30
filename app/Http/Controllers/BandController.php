@@ -86,6 +86,8 @@ class BandController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = Storage::putFile('bandPhotos', $request->photo);
+            $previousPhoto = Band::where('id', $request->id)->first()->photo;
+            Storage::delete($previousPhoto);
         }
 
         // Inserir na bade de dados

@@ -90,6 +90,8 @@ class AlbumController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = Storage::putFile('albumPhotos', $request->photo);
+            $previousPhoto = Album::where('id', $request->id)->first()->photo;
+            Storage::delete($previousPhoto);
         }
 
         // Inserir na bade de dados
