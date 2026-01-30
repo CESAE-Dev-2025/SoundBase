@@ -58,13 +58,13 @@
     </div>
 </nav>
 
-<div class="container">
+<main class="container">
     @yield('content')
-</div>
+</main>
 
-<footer class="fixed-bottom">
+<footer class="fixed-bottom bg-white">
     <div class="container">
-        <div class="d-flex flex-wrap justify-content-between align-items-start py-3 my-4 border-top">
+        <div class="d-flex flex-wrap justify-content-between align-items-start py-3 border-top">
             <div class="flex-column flex-md-row">
                 <p class="mb-0 px-2 py-2 text-body-secondary">© 2026 Soundbase</p>
             </div>
