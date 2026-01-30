@@ -15,7 +15,6 @@ class UtilController extends Controller
 
     public function fallback()
     {
-        // TODO: Adicionar 404 personalizada
         return view('fallback');
     }
 }
