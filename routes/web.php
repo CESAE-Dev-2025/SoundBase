@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UtilController::class, 'home'])
     ->name('homepage');
 
+// TODO: Usar Resources
+
 // --------------------------------------------------------------- Bands Routes
 Route::get('/bands', [BandController::class, 'index'])
     ->name('bands.all');

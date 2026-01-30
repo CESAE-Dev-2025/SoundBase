@@ -27,6 +27,7 @@ class AlbumController extends Controller
     public function create(Request $request)
     {
         $band = $this->getBand($request->bandId);
+
         return view('albums.add_album', compact('band'));
     }
 

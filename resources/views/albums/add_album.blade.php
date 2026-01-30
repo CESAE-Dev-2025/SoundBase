@@ -1,19 +1,32 @@
 @extends('layouts.fe_master')
 
 @section('content')
-    <h3 class="my-3">Novo Álbum de <strong>{{ $band->name }}</strong></h3>
+
+    @if ($band)
+        <h3 class="my-3">Novo Álbum de <strong>{{ $band->name }}</strong></h3>
+     @else
+        <h3 class="my-3">Novo Álbum</strong></h3>
+    @endif
 
     <form method="post" action="{{ route('albums.store') }}" class="col-6">
         @csrf
 
-        <input type="hidden" name="bandId" value="{{ $band->id }}">
+        <input type="hidden" name="bandId" value="{{ $band ? $band->id : 0 }}">
 
         <div class="mb-3">
             <label for="title" class="form-label">Título do Álbum</label>
             <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" required>
         </div>
         @error('title')
-            <p class="text-danger">Erro de nome</p>
+            <p class="text-danger">Erro de título</p>
+        @enderror
+
+        <div class="mb-3">
+            <label for="band" class="form-label">Banda</label>
+            <input name="band" type="text" class="form-control" id="band" aria-describedby="bandHelp" required>
+        </div>
+        @error('band')
+            <p class="text-danger">Erro de banda</p>
         @enderror
 
         <div class="mb-3">

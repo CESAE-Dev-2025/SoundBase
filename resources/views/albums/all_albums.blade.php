@@ -7,15 +7,18 @@
 @endphp
 
 @section('content')
-    {{-- TODO: Receber informações da banda --}}
+
     <h1 class="my-3">Álbums</h1>
 
     @if (session('message'))
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
+    @if ($isAdmin)
+        <a class="btn btn-primary mb-3" href="{{ route('albums.add', ['bandId' => $band->id]) }}">Adicionar álbum</a>
+    @endif
+
     @if (count($albums) == 0)
-        <a class="btn btn-primary mb-3" href="{{ route('albums.add') }}">Adicionar álbum</a>
         <p>Ainda não há bandas... :-(</p>
     @else
         <div class="d-flex gap-2">
@@ -24,9 +27,6 @@
                     aria-label="Search task" />
                 <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
             </form>
-            @if ($isAdmin)
-                <a class="btn btn-primary mb-3 col-3 col-lg-2" href="{{ route('albums.add') }}">Adicionar álbum</a>
-            @endif
         </div>
 
         <table class="table">

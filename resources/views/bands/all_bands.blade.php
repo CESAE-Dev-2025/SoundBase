@@ -10,7 +10,6 @@
 
     <h1 class="my-3">Bandas</h1>
 
-
     @if (session('message'))
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
@@ -18,7 +17,6 @@
     @if ($isAdmin)
         <a class="btn btn-primary mb-3" href="{{ route('bands.add') }}">Adicionar banda</a>
     @endif
-
 
     @if (count($bands) == 0)
         <p>Ainda não há bandas... :-(</p>
