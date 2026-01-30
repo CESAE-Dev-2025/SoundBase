@@ -8,12 +8,12 @@
                     class="d-block mx-lg-auto img-fluid rounded shadow" alt="Music" width="700" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Bem-vindo ao Soundbase</h1>
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Bem-vindo ao SoundBase</h1>
                 <p class="lead">A tua plataforma definitiva para gestão de bandas e álbuns. Organiza a tua coleção musical, explora novos artistas e mantém o controlo total sobre a tua base de dados sonora.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     @auth
                         <a href="{{ route('bands.all') }}" class="btn btn-primary btn-lg px-4 me-md-2">Ver Bandas</a>
-                        <a href="{{ route('dash.home') }}" class="btn btn-outline-secondary btn-lg px-4">Backoffice</a>
+                        <a href="{{ route('dash.home') }}" class="btn btn-outline-secondary btn-lg px-4">BackOffice</a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4 me-md-2">Começar Agora</a>
                         <a href="{{ route('bands.all') }}" class="btn btn-outline-secondary btn-lg px-4">Explorar</a>
