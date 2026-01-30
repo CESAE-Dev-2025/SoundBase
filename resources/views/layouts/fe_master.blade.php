@@ -48,12 +48,6 @@
                             <a href="{{ route('login') }}" class="btn btn-link">
                                 Log in
                             </a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('users.add') }}" class="btn btn-outline-primary">
-                                    Register
-                                </a>
-                            @endif
                         @endauth
                     </div>
                 @endif
