@@ -34,7 +34,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center col-1">#</th>
                     <th scope="col" class="text-center col-1">Foto</th>
                     <th scope="col">Nome</th>
                     <th scope="col" class="text-center col-1">Albums</th>
@@ -44,7 +43,6 @@
             <tbody class="table-group-divider">
                 @foreach ($bands as $band)
                     <tr>
-                        <th class="align-middle text-center col-1" scope="row">{{ $band->id }}</th>
                         <td class="align-middle profile-image text-center col-1">
                             <img src="{{ $band->photo ? asset('storage/' . $band->photo) : asset('images/Profile_avatar_placeholder_large.png') }}"
                                 alt="Imagem de perfil" class="rounded-circle" id="profile-picture">

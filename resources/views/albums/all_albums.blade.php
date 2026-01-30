@@ -32,7 +32,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center col-1">#</th>
                     <th scope="col" class="text-center col-1">Capa</th>
                     <th scope="col">Título</th>
                     <th scope="col" class="text-center col-2">Data de lançamento</th>
@@ -43,7 +42,6 @@
             <tbody class="table-group-divider">
                 @foreach ($albums as $album)
                     <tr>
-                        <th class="align-middle text-center col-1" scope="row">{{ $album->id }}</th>
                         <td class="align-middle cover-image text-center col-1">
                             <img src="{{ $album->photo ? asset('storage/' . $album->photo) : asset('images/no_album_cover.jpg') }}"
                                 alt="Imagem do álbum" class="" id="cover-picture">
