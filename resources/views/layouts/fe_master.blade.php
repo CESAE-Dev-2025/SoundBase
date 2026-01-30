@@ -41,18 +41,18 @@
             </ul>
 
             @if (Route::has('login'))
-                <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        @auth
-                            <form method="post" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="nav-link">Logout</button>
-                            </form>
-                        @else
-                            <a class="nav-link" href="{{ route('login') }}">Log in</a>
-                        @endauth
-                    </li>
-                </ul>
+            <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    @auth
+                    <form method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-link">Logout</button>
+                    </form>
+                    @else
+                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                    @endauth
+                </li>
+            </ul>
             @endif
         </div>
     </div>
@@ -64,28 +64,25 @@
 
 <footer class="fixed-bottom">
     <div class="container">
-        <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md-4 mb-0 px-2 text-body-secondary">© 2026 Soundbase</p> <a href="/"
-                                                                                      class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-                                                                                      aria-label="Bootstrap">
-                <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-            </a>
-            <ul class="nav col-md-4 justify-content-end">
+        <div class="d-flex flex-wrap justify-content-between align-items-start py-3 my-4 border-top">
+            <div class="flex-column flex-md-row">
+                <p class="mb-0 px-2 py-2 text-body-secondary">© 2026 Soundbase</p>
+            </div>
+
+            <ul class="nav justify-content-end flex-column flex-md-row">
                 <li class="nav-item">
                     <a href="/" class="nav-link text-body-secondary">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('bands.all') }}" class="nav-link text-body-secondary">Bandas</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('users.all') }}" class="nav-link text-body-secondary">Utilizadores</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">Backoffice</a>
-                </li>
                 @auth
+                    <li class="nav-item">
+                        <a href="{{ route('users.all') }}" class="nav-link text-body-secondary">Utilizadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">Backoffice</a>
+                    </li>
                 @endauth
             </ul>
         </div>
