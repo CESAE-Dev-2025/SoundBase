@@ -1,3 +1,10 @@
+
+@use('App\Enums\UserType')
+
+@php
+    $isAdmin = Auth::user() == null ? false : Auth::user()->user_type == UserType::ADMIN;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +25,7 @@
 </head>
 
 <body>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <a class="navbar-brand" href="{{ route('homepage') }}">
@@ -33,27 +41,40 @@
                 </li>
 
                 @auth
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dash.home') }}">BackOffice</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dash.home') }}">BackOffice</a>
+                    </li>
                 @endauth
             </ul>
 
             @if (Route::has('login'))
             <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
-                <li class="nav-item">
                     @auth
-                    <form method="post" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="nav-link">Logout</button>
-                    </form>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{Auth::user()->name}}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('users.view', Auth::user()->id) }}">Editar perfil</a></li>
+                                @if ($isAdmin)
+                                    <li><a class="dropdown-item" href="{{ route('users.all') }}">Utilizadores</a></li>
+                                @endif
+                                <li>
+                                    <form method="post" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
                     @else
-                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                        </li>
                     @endauth
-                </li>
             </ul>
             @endif
         </div>
@@ -78,10 +99,14 @@
                 <li class="nav-item">
                     <a href="{{ route('bands.all') }}" class="nav-link text-body-secondary">Bandas</a>
                 </li>
-                @auth
+
+                @if ($isAdmin)
                     <li class="nav-item">
                         <a href="{{ route('users.all') }}" class="nav-link text-body-secondary">Utilizadores</a>
                     </li>
+                @endif
+
+                @auth
                     <li class="nav-item">
                         <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">Backoffice</a>
                     </li>
