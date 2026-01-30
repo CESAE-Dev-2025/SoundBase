@@ -8,84 +8,89 @@
     <title>Homepage</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer>
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"
+            defer>
     </script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('homepage') }}">SoundBase</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('homepage') }}">SoundBase</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
+                </li>
+
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dash.home') }}">BackOffice</a>
+                </li>
+                @endauth
+            </ul>
+
+            @if (Route::has('login'))
+                <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('bands.all') }}">Bandas</a>
-                    </li>
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.all') }}">Utilizadores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dash.home') }}">BackOffice</a>
-                        </li>
-                    @endauth
-                </ul>
-                @if (Route::has('login'))
-                    <div class="flex items-center ms-auto gap-4">
                         @auth
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-primary">Logout</button>
+                                <button type="submit" class="nav-link">Logout</button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-link">
-                                Log in
-                            </a>
+                            <a class="nav-link" href="{{ route('login') }}">Log in</a>
                         @endauth
-                    </div>
-                @endif
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        @yield('content')
-    </div>
-
-    <footer class="fixed-bottom">
-        <div class="container">
-            <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 px-2 text-body-secondary">© 2026 Soundbase</p> <a href="/"
-                    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-                    aria-label="Bootstrap"> <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg> </a>
-                <ul class="nav col-md-4 justify-content-end">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link text-body-secondary">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('bands.all') }}" class="nav-link text-body-secondary">Bandas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('users.all') }}" class="nav-link text-body-secondary">Utilizadores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">Backoffice</a>
-                    </li>
-                    @auth
-                    @endauth
                 </ul>
-            </div>
+            @endif
         </div>
-    </footer>
+    </div>
+</nav>
+
+<div class="container">
+    @yield('content')
+</div>
+
+<footer class="fixed-bottom">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 px-2 text-body-secondary">© 2026 Soundbase</p> <a href="/"
+                                                                                      class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+                                                                                      aria-label="Bootstrap">
+                <svg class="bi me-2" width="40" height="32" aria-hidden="true">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item">
+                    <a href="/" class="nav-link text-body-secondary">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('bands.all') }}" class="nav-link text-body-secondary">Bandas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('users.all') }}" class="nav-link text-body-secondary">Utilizadores</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">Backoffice</a>
+                </li>
+                @auth
+                @endauth
+            </ul>
+        </div>
+    </div>
+</footer>
 
 </body>
 
