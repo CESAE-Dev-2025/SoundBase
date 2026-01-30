@@ -20,7 +20,8 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('homepage') }}">SoundBase</a>
+        <a class="navbar-brand" href="{{ route('homepage') }}">
+            <img src="{{ asset('images/SoundBase_logo.png') }}" alt="Logo" width="30" height="30" class="d-inline-block my-auto me-2">SoundBase</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,7 +68,7 @@
     <div class="container">
         <div class="d-flex flex-wrap justify-content-between align-items-start py-3 border-top">
             <div class="flex-column flex-md-row">
-                <p class="mb-0 px-2 py-2 text-body-secondary">© 2026 Soundbase</p>
+                <p class="mb-0 px-2 py-2 text-body-secondary">© 2026 SoundBase</p>
             </div>
 
             <ul class="nav justify-content-end flex-column flex-md-row">
