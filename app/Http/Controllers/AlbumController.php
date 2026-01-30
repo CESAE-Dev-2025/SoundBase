@@ -26,9 +26,9 @@ class AlbumController extends Controller
      */
     public function create(Request $request)
     {
-        $band = $this->getBand($request->bandId);
-
-        return view('albums.add_album', compact('band'));
+        $selectedBand = $this->getBand($request->bandId);
+        $bands = Band::all();
+        return view('albums.add_album', compact('selectedBand', 'bands'));
     }
 
     /**
@@ -40,18 +40,18 @@ class AlbumController extends Controller
         $request->validate([
             'title' => 'required|min:3|max:50',
             'release_date' => 'required',
-            'bandId' => 'required'
+            'band_id' => 'required'
         ]);
 
         // Inserir na bade de dados
         Album::create([
             'title' => $request->title,
             'release_date' => $request->release_date,
-            'band_id' => $request->bandId
+            'band_id' => $request->band_id
         ]);
 
         return redirect()
-            ->route('bands.view', $request->bandId)
+            ->route('bands.view', $request->band_id)
             ->with('message', 'Álbum adicionado com sucesso!');
     }
 
@@ -61,9 +61,10 @@ class AlbumController extends Controller
     public function show(string $id)
     {
         $album = Album::where('id', $id)->first();
-        $band = Band::where('id', $album->band_id)->first()->name;
+        $selectedBand = Band::where('id', $album->band_id)->first();
+        $bands = Band::all();
 
-        return view('albums.view_album', compact('album', 'band'));
+        return view('albums.view_album', compact('album', 'selectedBand', 'bands'));
     }
 
     /**
@@ -91,8 +92,13 @@ class AlbumController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = Storage::putFile('albumPhotos', $request->photo);
-            $previousPhoto = Album::where('id', $request->id)->first()->photo;
-            Storage::delete($previousPhoto);
+            $previousPhoto = Album::where('id', $request->id)
+                ->first()
+                ->photo;
+
+            if ($previousPhoto) {
+                Storage::delete($previousPhoto);
+            }
         }
 
         // Inserir na bade de dados
@@ -119,9 +125,7 @@ class AlbumController extends Controller
 
     private function getBand($bandId)
     {
-        $band = Band::where('id', $bandId)->first();
-
-        return $band;
+        return Band::where('id', $bandId)->first();
     }
 
     private function getAllAlbums($search)

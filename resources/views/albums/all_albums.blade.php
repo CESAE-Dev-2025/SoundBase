@@ -4,6 +4,7 @@
 
 @php
     $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
+    $bandId = $band->id ?? 0;
 @endphp
 
 @section('content')
@@ -15,7 +16,7 @@
     @endif
 
     @if ($isAdmin)
-        <a class="btn btn-primary mb-3" href="{{ route('albums.add', ['bandId' => $band->id]) }}">Adicionar álbum</a>
+        <a class="btn btn-primary mb-3" href="{{ route('albums.add', ['bandId' => $bandId]) }}">Adicionar álbum</a>
     @endif
 
     @if (count($albums) == 0)

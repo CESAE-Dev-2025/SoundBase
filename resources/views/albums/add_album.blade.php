@@ -2,16 +2,14 @@
 
 @section('content')
 
-    @if ($band)
-        <h3 class="my-3">Novo Álbum de <strong>{{ $band->name }}</strong></h3>
+    @if ($selectedBand)
+        <h3 class="my-3">Novo Álbum de <strong>{{ $selectedBand->name }}</strong></h3>
      @else
-        <h3 class="my-3">Novo Álbum</strong></h3>
+        <h3 class="my-3">Novo Álbum</h3>
     @endif
 
     <form method="post" action="{{ route('albums.store') }}" class="col-6">
         @csrf
-
-        <input type="hidden" name="bandId" value="{{ $band ? $band->id : 0 }}">
 
         <div class="mb-3">
             <label for="title" class="form-label">Título do Álbum</label>
@@ -22,10 +20,15 @@
         @enderror
 
         <div class="mb-3">
-            <label for="band" class="form-label">Banda</label>
-            <input name="band" type="text" class="form-control" id="band" aria-describedby="bandHelp" required>
+            <label for="band_id" class="form-label">Banda</label>
+            <select name="band_id" type="text" class="form-select" id="band_id" aria-describedby="band_idHelp" required>
+                <option value="0" {{ $selectedBand ? '' : 'selected'}}>Selecione a banda</option>
+                @foreach ($bands as $band)
+                    <option value="{{ $band->id }}"  {{ $selectedBand && $selectedBand->id === $band->id ? 'selected' : ''}}>{{ $band->name }}</option>
+                @endforeach
+            </select>
         </div>
-        @error('band')
+        @error('band_id')
             <p class="text-danger">Erro de banda</p>
         @enderror
 

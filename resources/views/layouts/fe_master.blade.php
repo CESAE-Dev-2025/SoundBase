@@ -88,9 +88,9 @@
     @yield('content')
 </main>
 
-<footer class="fixed-bottom bg-white">
+<footer class="fixed-bottom bg-body-tertiary border-top">
     <div class="container">
-        <div class="d-flex flex-wrap justify-content-between align-items-start py-3 border-top">
+        <div class="d-flex flex-wrap justify-content-between align-items-start py-3 ">
             <div class="flex-column flex-md-row">
                 <p class="mb-0 px-2 py-2 text-body-secondary">© 2026 SoundBase</p>
             </div>

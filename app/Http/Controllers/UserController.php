@@ -88,6 +88,13 @@ class UserController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = Storage::putFile('userPhotos', $request->photo);
+            $previousPhoto = User::where('id', $request->id)
+                ->first()
+                ->photo;
+
+            if ($previousPhoto) {
+                Storage::delete($previousPhoto);
+            }
         }
 
         // Inserir na bade de dados

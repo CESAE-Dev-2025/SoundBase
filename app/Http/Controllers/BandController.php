@@ -55,7 +55,6 @@ class BandController extends Controller
      */
     public function show(string $id)
     {
-        // $band = $this->getBand($id);
         $band = Band::where('id', $id)->first();
 
         $albums = $this->getAllAlbums($band->id);
@@ -86,8 +85,13 @@ class BandController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = Storage::putFile('bandPhotos', $request->photo);
-            $previousPhoto = Band::where('id', $request->id)->first()->photo;
-            Storage::delete($previousPhoto);
+            $previousPhoto = Band::where('id', $request->id)
+                ->first()
+                ->photo;
+
+            if ($previousPhoto) {
+                Storage::delete($previousPhoto);
+            }
         }
 
         // Inserir na bade de dados
