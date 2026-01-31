@@ -32,7 +32,7 @@
 
             <div class="mb-3">
                 <label for="band_id" class="form-label">Banda</label>
-                <select name="band_id" type="text" class="form-select" id="band_id" aria-describedby="band_idHelp" required>
+                <select name="band_id" type="text" class="form-select" id="band_id" aria-describedby="band_idHelp" required {{ Auth::user() ? '' : 'disabled' }}>
                     <option value="0">Selecione a banda</option>
                     @foreach ($bands as $band)
                         <option value="{{ $band->id }}"  {{ $selectedBand->id === $band->id ? 'selected' : ''}}>{{ $band->name }}</option>
@@ -40,7 +40,7 @@
                 </select>
             </div>
             @error('band_id')
-            <p class="text-danger">Erro de banda</p>
+                <p class="text-danger">Erro de banda</p>
             @enderror
 
             <div class="mb-3">
