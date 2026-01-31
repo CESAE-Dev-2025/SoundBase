@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@section('title', '404 - Not Found')
+
 @section('content')
     <div class="container text-center py-5 mt-5">
         <h1 class="display-1 fw-bold text-primary">404</h1>

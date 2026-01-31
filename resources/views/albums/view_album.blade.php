@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@section('title', $album->title)
+
 @use('App\Enums\UserType')
 
 @section('content')

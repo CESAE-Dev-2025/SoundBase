@@ -1,5 +1,6 @@
 @extends('layouts.fe_master')
 
+@section('title', 'Reset de password')
 
 @section('content')
     <div class="col-6 mx-auto mt-4">

@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@section('title', 'Nova Banda')
+
 @section('content')
     <h3 class="my-3">Nova Banda</h3>
 

@@ -1,5 +1,6 @@
 @extends('layouts.fe_master')
 
+@section('title', 'Homepage')
 
 @section('content')
     <div class="py-5">

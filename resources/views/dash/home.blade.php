@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@section('title', 'Dashboard')
+
 @use('App\Enums\UserType')
 
 @php

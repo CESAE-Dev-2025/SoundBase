@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@section('title', "Informações de $band->strArtist")
+
 @section('content')
 
     <img class="w-100 my-5" src="{{ $band->strArtistBanner }}">

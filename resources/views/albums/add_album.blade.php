@@ -1,5 +1,7 @@
 @extends('layouts.fe_master')
 
+@section('title', 'Novo Álbum')
+
 @section('content')
 
     @if ($selectedBand)
