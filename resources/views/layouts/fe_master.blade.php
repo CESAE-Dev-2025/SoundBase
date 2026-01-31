@@ -114,7 +114,7 @@
 
                 @auth
                     <li class="nav-item">
-                        <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">Backoffice</a>
+                        <a href="{{ route('dash.home') }}" class="nav-link text-body-secondary">BackOffice</a>
                     </li>
                 @endauth
             </ul>
