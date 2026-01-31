@@ -2,10 +2,6 @@
 
 @use('App\Enums\UserType')
 
-@php
-    $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
-@endphp
-
 @section('content')
     <h1 class="my-3">{{ $album->title }} | {{ $selectedBand->name }}</h1>
 
@@ -24,7 +20,7 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Título do Álbum</label>
                 <input name="title" type="text" class="form-control" id="title" value="{{ $album->title }}"
-                       aria-describedby="titleHelp" required {{ $isAdmin ? '' : 'readonly' }}>
+                       aria-describedby="titleHelp" required {{ Auth::user() ? '' : 'readonly' }}>
             </div>
             @error('title')
             <p class="text-danger">Erro de título</p>
@@ -32,22 +28,24 @@
 
             <div class="mb-3">
                 <label for="band_id" class="form-label">Banda</label>
-                <select name="band_id" type="text" class="form-select" id="band_id" aria-describedby="band_idHelp" required {{ Auth::user() ? '' : 'disabled' }}>
+                <select name="band_id" type="text" class="form-select" id="band_id" aria-describedby="band_idHelp"
+                        required {{ Auth::user() ? '' : 'disabled' }}>
                     <option value="0">Selecione a banda</option>
                     @foreach ($bands as $band)
-                        <option value="{{ $band->id }}"  {{ $selectedBand->id === $band->id ? 'selected' : ''}}>{{ $band->name }}</option>
+                        <option
+                            value="{{ $band->id }}" {{ $selectedBand->id === $band->id ? 'selected' : ''}}>{{ $band->name }}</option>
                     @endforeach
                 </select>
             </div>
             @error('band_id')
-                <p class="text-danger">Erro de banda</p>
+            <p class="text-danger">Erro de banda</p>
             @enderror
 
             <div class="mb-3">
                 <label for="release_date" class="form-label">Data de lançamento</label>
                 <input name="release_date" type="date" class="form-control" id="release-date"
                        value="{{ $album->release_date }}" aria-describedby="release_dateHelp" required
-                    {{ $isAdmin ? '' : 'readonly' }}>
+                    {{ Auth::user() ? '' : 'readonly' }}>
             </div>
             @error('release-date')
             <p class="text-danger">Erro de data de lançamento</p>
