@@ -11,7 +11,7 @@
             <input name="name" type="text" class="form-control" id="name" aria-describedby="nameHelp" required>
         </div>
         @error('name')
-            <p class="text-danger">Erro de nome</p>
+        <p class="text-danger">Erro de nome</p>
         @enderror
 
         <button type="submit" class="btn btn-primary">Gravar</button>

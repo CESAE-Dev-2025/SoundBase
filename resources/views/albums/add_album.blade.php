@@ -4,7 +4,7 @@
 
     @if ($selectedBand)
         <h3 class="my-3">Novo Álbum de <strong>{{ $selectedBand->name }}</strong></h3>
-     @else
+    @else
         <h3 class="my-3">Novo Álbum</h3>
     @endif
 
@@ -16,7 +16,7 @@
             <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" required>
         </div>
         @error('title')
-            <p class="text-danger">Erro de título</p>
+        <p class="text-danger">Erro de título</p>
         @enderror
 
         <div class="mb-3">
@@ -24,18 +24,19 @@
             <select name="band_id" type="text" class="form-select" id="band_id" aria-describedby="band_idHelp" required>
                 <option value="0" {{ $selectedBand ? '' : 'selected'}}>Selecione a banda</option>
                 @foreach ($bands as $band)
-                    <option value="{{ $band->id }}"  {{ $selectedBand && $selectedBand->id === $band->id ? 'selected' : ''}}>{{ $band->name }}</option>
+                    <option
+                        value="{{ $band->id }}" {{ $selectedBand && $selectedBand->id === $band->id ? 'selected' : ''}}>{{ $band->name }}</option>
                 @endforeach
             </select>
         </div>
         @error('band_id')
-            <p class="text-danger">Erro de banda</p>
+        <p class="text-danger">Erro de banda</p>
         @enderror
 
         <div class="mb-3">
             <label for="release_date" class="form-label">Data de lançamento</label>
             <input name="release_date" type="date" class="form-control" id="release_date"
-                aria-describedby="release_dateHelp">
+                   aria-describedby="release_dateHelp">
         </div>
 
         <button type="submit" class="btn btn-primary">Gravar</button>

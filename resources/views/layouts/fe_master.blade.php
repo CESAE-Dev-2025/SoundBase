@@ -1,17 +1,17 @@
-
 @use('App\Enums\UserType')
 
 @php
     $isAdmin = Auth::user() != null && Auth::user()->user_type == UserType::ADMIN;
 @endphp
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Homepage</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -29,7 +29,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <a class="navbar-brand" href="{{ route('homepage') }}">
-            <img src="{{ asset('images/SoundBase_logo.png') }}" alt="Logo" width="30" height="30" class="d-inline-block my-auto me-2">SoundBase</a>
+            <img src="{{ asset('images/SoundBase_logo.png') }}" alt="Logo" width="30" height="30"
+                 class="d-inline-block my-auto me-2">SoundBase</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,14 +52,16 @@
             </ul>
 
             @if (Route::has('login'))
-            <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
                                 {{Auth::user()->name}}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('users.view', Auth::user()->id) }}">Editar perfil</a></li>
+                                <li><a class="dropdown-item" href="{{ route('users.view', Auth::user()->id) }}">Editar
+                                        perfil</a></li>
                                 @if ($isAdmin)
                                     <li><a class="dropdown-item" href="{{ route('users.all') }}">Utilizadores</a></li>
                                 @endif
@@ -71,14 +74,12 @@
                             </ul>
                         </li>
 
-
-
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Log in</a>
                         </li>
                     @endauth
-            </ul>
+                </ul>
             @endif
         </div>
     </div>
