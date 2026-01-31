@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use App\Models\Band;
 use App\Models\Album;
 use Illuminate\Support\Facades\Storage;
@@ -60,6 +62,28 @@ class BandController extends Controller
         $albums = $this->getAllAlbums($band->id);
 
         return view('bands.view_band', compact('band', 'albums'));
+    }
+
+    /**
+     * Display the specified resource detail from AudioDB API.
+     * @throws ConnectionException
+     */
+    public function detail(string $id)
+    {
+        $bandName = Band::where('id', $id)->first()->name;
+
+        $response = Http::get('https://www.theaudiodb.com/api/v1/json/123/search.php', [
+            's' => $bandName,
+        ]);
+
+        $responseData = json_decode($response->body())->artists;
+
+        if ($responseData) {
+            $band = $responseData[0];
+            return view('bands.view_band_detail', compact('band'));
+        }
+
+        return view('fallback');
     }
 
     /**

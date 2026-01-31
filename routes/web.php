@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UtilController::class, 'home'])
     ->name('homepage');
 
-// TODO: Usar Resources
-
-// --------------------------------------------------------------- Bands Routes
+// -------------------------------------------------------------------------------------------------------- Bands Routes
 Route::get('/bands', [BandController::class, 'index'])
     ->name('bands.all');
 
 Route::get('/bands/{id}', [BandController::class, 'show'])
     ->name('bands.view');
+
+Route::get('/band-detail/{id}', [BandController::class, 'detail'])
+    ->name('bands.detail');
 
 Route::get('/delete-band/{id}', [BandController::class, 'destroy'])
     ->name('bands.delete')->middleware('auth');
@@ -31,7 +32,7 @@ Route::post('/bands/store-band', [BandController::class, 'store'])
 Route::put('/update-band', [BandController::class, 'update'])
     ->name('bands.update')->middleware('auth');
 
-// -------------------------------------------------------------- Albums Routes
+// ------------------------------------------------------------------------------------------------------- Albums Routes
  Route::get('/albums', [AlbumController::class, 'index'])
      ->name('albums.all');
 
@@ -50,7 +51,7 @@ Route::post('/albums/store-album', [AlbumController::class, 'store'])
 Route::put('/update-album', [AlbumController::class, 'update'])
     ->name('albums.update')->middleware('auth');
 
-// --------------------------------------------------------------- Users Routes
+// -------------------------------------------------------------------------------------------------------- Users Routes
 Route::get('/users', [UserController::class, 'index'])
     ->name('users.all')->middleware('auth');
 
@@ -69,9 +70,9 @@ Route::post('/users/store-user', [UserController::class, 'store'])
 Route::put('/update-user', [UserController::class, 'update'])
     ->name('users.update')->middleware('auth');
 
-// ----------------------------------------------------------- Dashboard Routes
+// ---------------------------------------------------------------------------------------------------- Dashboard Routes
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dash.home')->middleware('auth');
 
-// ------------------------------------------------------------------- Fallback
+// ------------------------------------------------------------------------------------------------------------ Fallback
 Route::fallback([UtilController::class, 'fallback']);
